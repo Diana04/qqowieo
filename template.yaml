@@ -86,6 +86,4 @@ spec:
               - circle
               - none
             default: github
-        required:
-          project_short_description
-          docker_image
+        required: [project_short_description, docker_image]
