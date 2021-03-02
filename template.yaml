@@ -81,3 +81,5 @@ spec:
           - circle
           - none
         default: github
+    type: Control
+    scope: #/properties/use_ci
