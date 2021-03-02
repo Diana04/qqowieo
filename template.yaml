@@ -12,6 +12,13 @@ spec:
   templater: cookiecutter
   type: service
   path: "."
+  uiSchema:
+    type: VerticalLayout
+    elements:
+      - type: Control
+        scope: #/properties/component_id
+      - type: Control
+        scope: #/properties/person/project_short_description
   schema:
     required:
       - component_id
