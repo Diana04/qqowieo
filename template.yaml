@@ -1,50 +1,13 @@
-  Skip to content
-    Search or jump to…
-
-    Pull requests
-    Issues
-    Marketplace
-    Explore
-
-    @Diana04
-    Learn Git and GitHub without any code!
-    Using the Hello World guide, you’ll start a branch, write comments, and open a pull request.
-
-
-    Diana04
-    /
-    qqowieo
-    Private
-    1
-    00
-    Code
-    Issues
-    Pull requests
-    1
-    Actions
-    Projects
-    Security
-    Insights
-    Settings
-    qqowieo/template.yaml
-    @Diana04
-    Diana04 Update template.yaml
-    Latest commit a207404 2 hours ago
-    History
-    1 contributor
-    67 lines (62 sloc)  1.72 KB
-
-  apiVersion: backstage.io/v1beta2
-  kind: Template
-  # some metadata about the template itself
-  metadata:
-    name: v1beta2-demo
-    title: Test Action template
-    description: scaffolder v1beta2 template demo
-  spec:
-    owner: backstage/techdocs-core
-    type: service
-
+apiVersion: backstage.io/v1beta2
+kind: Template
+# some metadata about the template itself
+metadata:
+  name: v1beta2-demo
+  title: Test Action template
+  description: scaffolder v1beta2 template demo
+spec:
+  owner: backstage/techdocs-core
+  type: service
     # these are the steps which are rendered in the frontend with the form input
     parameters:
       - title: Fill in some steps
@@ -74,49 +37,33 @@
               allowedHosts:
                 - github.com
           owner:
-            title: Repository Location 23123
+            title: Repository owner
             type: string
-
-    # here's the steps that are executed in series in the scaffolder backend
-    steps:
-      - id: fetch-base
-        name: Fetch Base
-        action: fetch:cookiecutter
-        input:
-          url: ./template
-          values:
-            name: '{{ parameters.name }}'
-
-      - id: fetch-docs
-        name: Fetch Docs
-        action: fetch:plain
-        input:
-          targetPath: ./community
-          url: https://github.com/backstage/community/tree/main/backstage-community-sessions
-
-      - id: publish
-        name: Publish
-        action: publish:github
-        input:
-          allowedHosts: ['github.com']
-          description: 'This is {{ parameters.name }}'
-          repoUrl: '{{ parameters.repoUrl }}'
-
-      - id: register
-        name: Register
-        action: catalog:register
-        input:
-          repoContentsUrl: '{{ steps.publish.output.repoContentsUrl }}'
-          catalogInfoPath: '/catalog-info.yaml'
-    © 2021 GitHub, Inc.
-    Terms
-    Privacy
-    Security
-    Status
-    Docs
-    Contact GitHub
-    Pricing
-    API
-    Training
-    Blog
-    About
+  # here's the steps that are executed in series in the scaffolder backend
+  steps:
+    - id: fetch-base
+      name: Fetch Base
+      action: fetch:cookiecutter
+      input:
+        url: ./template
+        values:
+          name: '{{ parameters.name }}'
+    - id: fetch-docs
+      name: Fetch Docs
+      action: fetch:plain
+      input:
+        targetPath: ./community
+        url: https://github.com/backstage/community/tree/main/backstage-community-sessions
+    - id: publish
+      name: Publish
+      action: publish:github
+      input:
+        allowedHosts: ['github.com']
+        description: 'This is {{ parameters.name }}'
+        repoUrl: '{{ parameters.repoUrl }}'
+    - id: register
+      name: Register
+      action: catalog:register
+      input:
+        repoContentsUrl: '{{ steps.publish.output.repoContentsUrl }}'
+        catalogInfoPath: '/catalog-info.yaml'
