@@ -1,67 +1,122 @@
-apiVersion: backstage.io/v1beta2
-kind: Template
-# some metadata about the template itself
-metadata:
-  name: v1beta2-demo
-  title: Test Action template
-  description: scaffolder v1beta2 template demo
-spec:
-  owner: backstage/techdocs-core
-  type: service
+  Skip to content
+    Search or jump to…
 
-  # these are the steps which are rendered in the frontend with the form input
-  parameters:
-    - title: Fill in some steps
-      required:
-        - name
-      properties:
-        name:
-          title: Name
-          type: string
-          description: Unique name of the component
-          ui:autofocus: true
-          ui:options:
-            rows: 5
-    - title: Choose a location
-      required:
-        - repoUrl
-      properties:
-        repoUrl:
-          title: Repository Location
-          type: string
-          ui:field: RepoUrlPicker
-          ui:options:
-            allowedHosts:
-              - github.com
+    Pull requests
+    Issues
+    Marketplace
+    Explore
 
-  # here's the steps that are executed in series in the scaffolder backend
-  steps:
-    - id: fetch-base
-      name: Fetch Base
-      action: fetch:cookiecutter
-      input:
-        url: ./template
-        values:
-          name: '{{ parameters.name }}'
+    @Diana04
+    Learn Git and GitHub without any code!
+    Using the Hello World guide, you’ll start a branch, write comments, and open a pull request.
 
-    - id: fetch-docs
-      name: Fetch Docs
-      action: fetch:plain
-      input:
-        targetPath: ./community
-        url: https://github.com/backstage/community/tree/main/backstage-community-sessions
 
-    - id: publish
-      name: Publish
-      action: publish:github
-      input:
-        allowedHosts: ['github.com']
-        description: 'This is {{ parameters.name }}'
-        repoUrl: '{{ parameters.repoUrl }}'
+    Diana04
+    /
+    qqowieo
+    Private
+    1
+    00
+    Code
+    Issues
+    Pull requests
+    1
+    Actions
+    Projects
+    Security
+    Insights
+    Settings
+    qqowieo/template.yaml
+    @Diana04
+    Diana04 Update template.yaml
+    Latest commit a207404 2 hours ago
+    History
+    1 contributor
+    67 lines (62 sloc)  1.72 KB
 
-    - id: register
-      name: Register
-      action: catalog:register
-      input:
-        repoContentsUrl: '{{ steps.publish.output.repoContentsUrl }}'
-        catalogInfoPath: '/catalog-info.yaml'
+  apiVersion: backstage.io/v1beta2
+  kind: Template
+  # some metadata about the template itself
+  metadata:
+    name: v1beta2-demo
+    title: Test Action template
+    description: scaffolder v1beta2 template demo
+  spec:
+    owner: backstage/techdocs-core
+    type: service
+
+    # these are the steps which are rendered in the frontend with the form input
+    parameters:
+      - title: Fill in some steps
+        required:
+          - name
+        properties:
+          name:
+            title: Name
+            type: string
+            description: Unique name of the component
+            ui:autofocus: true
+            ui:options:
+              rows: 5
+          description:
+            title: Description
+            type: string
+            description: Description of the component
+      - title: Choose a location
+        required:
+          - repoUrl
+        properties:
+          repoUrl:
+            title: Repository Location
+            type: string
+            ui:field: RepoUrlPicker
+            ui:options:
+              allowedHosts:
+                - github.com
+          owner:
+            title: Repository Location 23123
+            type: string
+
+    # here's the steps that are executed in series in the scaffolder backend
+    steps:
+      - id: fetch-base
+        name: Fetch Base
+        action: fetch:cookiecutter
+        input:
+          url: ./template
+          values:
+            name: '{{ parameters.name }}'
+
+      - id: fetch-docs
+        name: Fetch Docs
+        action: fetch:plain
+        input:
+          targetPath: ./community
+          url: https://github.com/backstage/community/tree/main/backstage-community-sessions
+
+      - id: publish
+        name: Publish
+        action: publish:github
+        input:
+          allowedHosts: ['github.com']
+          description: 'This is {{ parameters.name }}'
+          repoUrl: '{{ parameters.repoUrl }}'
+
+      - id: register
+        name: Register
+        action: catalog:register
+        input:
+          repoContentsUrl: '{{ steps.publish.output.repoContentsUrl }}'
+          catalogInfoPath: '/catalog-info.yaml'
+    © 2021 GitHub, Inc.
+    Terms
+    Privacy
+    Security
+    Status
+    Docs
+    Contact GitHub
+    Pricing
+    API
+    Training
+    Blog
+    About
