@@ -2,8 +2,8 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: {{cookiecutter.name | jsonify}}
-  description: description
+  description: {{cookiecutter.description | jsonify}}
 spec:
   type: documentation
   lifecycle: experimental
-  owner: guest
+  owner: {{cookiecutter.owner | jsonify}}
