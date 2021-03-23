@@ -62,9 +62,12 @@ spec:
       name: Fetch Base
       action: fetch:cookiecutter
       input:
-        url: ./template
+        url: .
         values:
+          id: '{{ parameters.name }}'
           name: '{{ parameters.name }}'
+          owner: '{{ parameters.owner }}'
+          description: '{{ parameters.description }}'
 
 #    - id: fetch-docs
 #      name: Fetch Docs
