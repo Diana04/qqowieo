@@ -50,7 +50,7 @@ spec:
           description: The organization, user or project that this repo will belong to
           type: string
           default: Toyota-Motor-North-America
-          ui:disabled: true
+#          ui:disabled: true
         repository:
           title: Repository
           description: The name of the repository
