@@ -65,8 +65,6 @@ spec:
         url: .
         values:
           name: '{{ parameters.name }}'
-          owner: '{{ parameters.owner }}'
-          description: '{{ parameters.description }}'
 
 #    - id: fetch-docs
 #      name: Fetch Docs
