@@ -64,7 +64,6 @@ spec:
       input:
         url: .
         values:
-          id: '{{ parameters.name }}'
           name: '{{ parameters.name }}'
           owner: '{{ parameters.owner }}'
           description: '{{ parameters.description }}'
