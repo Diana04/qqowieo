@@ -68,13 +68,6 @@ spec:
           owner: '{{ parameters.owner }}'
           description: '{{ parameters.description }}'
 
-#    - id: fetch-docs
-#      name: Fetch Docs
-#      action: fetch:plain
-#      input:
-#        targetPath: ./community
-#        url: https://github.com/backstage/community/tree/main/backstage-community-sessions
-
     - id: publish
       name: Publish
       action: publish:github
@@ -89,3 +82,7 @@ spec:
       input:
         repoContentsUrl: '{{ steps.publish.output.repoContentsUrl }}'
         catalogInfoPath: '/catalog-info.yaml'
+
+  output:
+    remoteUrl: '{{ steps.publish.output.remoteUrl }}'
+    entityRef: '{{ steps.register.output.entityRef }}'

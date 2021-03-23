@@ -3,6 +3,8 @@ kind: Component
 metadata:
   name: {{cookiecutter.name | jsonify}}
   description: {{cookiecutter.description | jsonify}}
+  annotations:
+    backstage.io/techdocs-ref: url:{{cookiecutter.storePath}}
 spec:
   type: documentation
   lifecycle: experimental
