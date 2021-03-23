@@ -28,17 +28,27 @@ spec:
           description: Description of the component
     - title: Choose a location
       required:
-        - repoUrl
+        - owner
+        - repository
       properties:
-        repoUrl:
-          title: Repository Location
+#        repoUrl:
+#          title: Repository Location
+#          type: string
+#          ui:field: RepoUrlPicker
+#          ui:options:
+#            allowedHosts:
+#              - github.com
+        host:
+          title: The host where the repository will be created
           type: string
-          ui:field: RepoUrlPicker
-          ui:options:
-            allowedHosts:
-              - github.com
+          enum:
+            - github.com
         owner:
-          title: Repository owner
+          title: The organization, user or project that this repo will belong to
+          type: string
+          default: https://github.com/Toyota-Motor-North-America
+        repository:
+          title: The name of the repository
           type: string
 
   # here's the steps that are executed in series in the scaffolder backend
@@ -64,7 +74,7 @@ spec:
       input:
         allowedHosts: ['github.com']
         description: 'This is {{ parameters.name }}'
-        repoUrl: '{{ parameters.repoUrl }}'
+        repoUrl: 'https://{{ parameters.host }}?owner={{ parameters.owner }}&repo={{ parameters.repository }}'
 
     - id: register
       name: Register
