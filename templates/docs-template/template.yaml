@@ -58,20 +58,27 @@ spec:
 
   # here's the steps that are executed in series in the scaffolder backend
   steps:
+#    - id: fetch-base
+#      name: Fetch Base
+#      action: fetch:cookiecutter
+#      input:
+#        url: ./template
+#        values:
+#          name: '{{ parameters.name }}'
     - id: fetch-base
       name: Fetch Base
       action: fetch:cookiecutter
       input:
-        url: ./template
+        url: .
         values:
           name: '{{ parameters.name }}'
 
-    - id: fetch-docs
-      name: Fetch Docs
-      action: fetch:plain
-      input:
-        targetPath: ./community
-        url: https://github.com/backstage/community/tree/main/backstage-community-sessions
+#    - id: fetch-docs
+#      name: Fetch Docs
+#      action: fetch:plain
+#      input:
+#        targetPath: ./community
+#        url: https://github.com/backstage/community/tree/main/backstage-community-sessions
 
     - id: publish
       name: Publish
