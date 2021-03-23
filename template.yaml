@@ -1,14 +1,13 @@
-# Notice the v1beta2 version
 apiVersion: backstage.io/v1beta2
 kind: Template
 # some metadata about the template itself
 metadata:
-  name: v1beta2-demo
-  title: Test Action template
-  description: scaffolder v1beta2 template demo
+  name: tmna-docs-template
+  title: TMNA Docs Template
+  description: Create a new standalone documentation project
 spec:
   owner: backstage/techdocs-core
-  type: service
+  type: documentation
 
   # these are the steps which are rendered in the frontend with the form input
   parameters:
@@ -23,17 +22,39 @@ spec:
           ui:autofocus: true
           ui:options:
             rows: 5
+        description:
+          title: Description
+          type: string
+          description: Description of the component
     - title: Choose a location
       required:
-        - repoUrl
+        - host
+        - owner
+        - repository
       properties:
-        repoUrl:
-          title: Repository Location
+#        repoUrl:
+#          title: Repository Location
+#          type: string
+#          ui:field: RepoUrlPicker
+#          ui:options:
+#            allowedHosts:
+#              - github.com
+        host:
+          title: Host
+          description: The host where the repository will be created
           type: string
-          ui:field: RepoUrlPicker
-          ui:options:
-            allowedHosts:
-              - github.com
+          enum:
+            - github.com
+        owner:
+          title: Owner
+          description: The organization, user or project that this repo will belong to
+          type: string
+          default: Toyota-Motor-North-America
+          ui:disabled: true
+        repository:
+          title: Repository
+          description: The name of the repository
+          type: string
 
   # here's the steps that are executed in series in the scaffolder backend
   steps:
@@ -58,7 +79,7 @@ spec:
       input:
         allowedHosts: ['github.com']
         description: 'This is {{ parameters.name }}'
-        repoUrl: '{{ parameters.repoUrl }}'
+        repoUrl: 'https://{{ parameters.host }}?owner={{ parameters.owner }}&repo={{ parameters.repository }}'
 
     - id: register
       name: Register
@@ -66,8 +87,3 @@ spec:
       input:
         repoContentsUrl: '{{ steps.publish.output.repoContentsUrl }}'
         catalogInfoPath: '/catalog-info.yaml'
-
-  # some outputs which are saved along with the job for use in the frontend
-  output:
-    remoteUrl: '{{ steps.publish.output.remoteUrl }}'
-    entityRef: '{{ steps.register.output.entityRef }}'
